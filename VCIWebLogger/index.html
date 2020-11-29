@@ -19,9 +19,11 @@
 
         ws.onmessage = function (e) {
             let d = msgpack5().decode(e.data)[2][0];
-            let message = d['Message'].replace("\n", "\\n");
-            let timeStr = new Date(d['UnixTime'] * 1000).toLocaleTimeString();
-            body.append(`${timeStr}\t|\t${d['Category']}\t|\t${d['Item']}\t|\t${message}\n`);
+            let message = JSON.stringify(d);
+            // let message = d['Message'].replace("\n", "\\n");
+            // let timeStr = new Date(d['UnixTime'] * 1000).toLocaleTimeString();
+            // body.append(`${timeStr}\t|\t${d['Category']}\t|\t${d['Item']}\t|\t${message}\n`);
+            body.prepend(`${message}\n`)
         }
     }
 </script>
